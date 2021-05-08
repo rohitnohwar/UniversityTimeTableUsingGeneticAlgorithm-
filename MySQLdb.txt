@@ -1,0 +1,42 @@
+create database tt;
+use tt;
+create table sub(subid varchar(255) not null, frequency int, noofslots int,primary key(subid));
+create table prof(profid varchar(255) not null, primary key(profid));
+create table room(roomid varchar(255) not null, primary key(roomid));
+
+create table info(roomid varchar(255), subid varchar(255), profid varchar(255),
+foreign key(roomid) references room(roomid),
+foreign key(subid) references sub(subid),
+foreign key(profid) references prof(profid)
+);
+
+CREATE TABLE no_of_slots (
+    slots INT NOT NULL
+);  
+
+DELIMITER $$
+CREATE TRIGGER mytable_before_trig1 BEFORE INSERT ON no_of_slots
+FOR EACH ROW
+BEGIN 
+IF (SELECT COUNT(slots) FROM no_of_slots) > 0 THEN
+    SET NEW.slots = NULL;
+END IF;
+END;
+$$  
+
+
+
+
+CREATE TABLE no_of_days (
+    days INT NOT NULL
+);  
+
+DELIMITER $$
+CREATE TRIGGER mytable_before_trig BEFORE INSERT ON no_of_days
+FOR EACH ROW
+BEGIN 
+IF (SELECT COUNT(days) FROM no_of_days) > 0 THEN
+    SET NEW.days = NULL;
+END IF;
+END;
+$$  
