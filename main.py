@@ -2,6 +2,10 @@ import random
 import mysql.connector
 import math
 
+def initialise100(sub, prof, room, days, slots, n, qq):
+    rows=days
+    cols=slots
+    
 def initialise1(sub, prof, room, days, slots, n, qq):
     rows=days
     cols=slots
